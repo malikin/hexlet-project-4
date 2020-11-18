@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/simple-head :: simple-head}">
+<body>
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+<!-- Main -->
+<main class="flex-shrink-0 my-5">
+    <div class="container">
+        <div class="row justify-content-md-center" th:if="${tasks.isEmpty()}">
+            <a class="btn btn-outline-info col col-lg-2" th:href="${'/tasks/new'}"
+               th:text="#{task.action.new}"></a>
+        </div>
+        <div th:unless="${tasks.isEmpty()}">
+            <h4 th:text="#{task.quantity} + ' ' + ${tasks.size()}"></h4>
+            <div class="table-responsive-md">
+                <table class="table table-striped">
+                    <thead class="thead-light">
+                    <tr>
+                        <th th:text="#{field.id}"></th>
+                        <th th:text="#{task.name}"></th>
+                        <th th:text="#{task.description}"></th>
+                        <th th:text="#{task.status}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.id}"></td>
+                        <td th:text="${task.name}"></td>
+                        <td th:text="${task.description}"></td>
+                        <td th:text="${task.status}"></td>
+                        <td>
+                            <a class="btn btn-outline-info"
+                               th:href="${'/tasks/' + task.id}" th:text="#{action.view}"></a>
+                        </td>
+                        <td>
+                            <form action="#" th:action="@{'/tasks/{id}'(id=${task.id})}" th:method="delete">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button class="btn btn-outline-danger" type="submit" id="deleteTask"
+                                        th:text="#{action.delete}"></button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

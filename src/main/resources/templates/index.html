@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{fragments/simple-head :: simple-head}">
+<body class="d-flex flex-column h-100">
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+<!-- Main -->
+<main class="flex-shrink-0 my-5">
+    <div class="container">
+        <div class="row">
+            <h1 th:text="#{common.header.title}"></h1>
+        </div>
+    </div>
+</main>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer class="footer text-muted pb-5 mt-auto mt-5" th:fragment="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="h4">© Hexlet</div>
+                <hr>
+                <div class="dropdown dropup mb-2">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownLanguageButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Language
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownLanguageButton">
+                        <a class="dropdown-item" href="?lang=ru">Русский</a>
+                        <a class="dropdown-item" href="?lang=en">English</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4"></div>
+            <div class="col-12 col-md-4">
+                <div class="h5 mb-3" th:text="#{footer.support}"></div>
+                <ul class="list-unstyled">
+                    <li><a target="_blank" href="https://ru.hexlet.io/knowledge"
+                           th:text="#{footer.knowledge}"></a></li>
+                    <li><a target="_blank" href="https://ru.hexlet.io/blog"
+                           th:text="#{footer.blog}"></a></li>
+                    <li><a target="_blank" href="https://ru.hexlet.io/pages/recommended-books"
+                           th:text="#{footer.recommended.books}"></a>
+                    </li>
+                </ul>
+                <div class="h5 mb-3" th:text="#{footer.more}"></div>
+                <ul class="list-unstyled">
+                    <li><a target="_blank" href="https://ru.code-basics.com/">Code Basics</a></li>
+                    <li><a target="_blank" href="https://codebattle.hexlet.io/">Code Battles</a></li>
+                    <li><a target="_blank" href="https://guides.hexlet.io/">Hexlet Guides</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

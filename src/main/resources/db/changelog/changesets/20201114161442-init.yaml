@@ -1,0 +1,189 @@
+databaseChangeLog:
+- changeSet:
+    id: 1605359693315-1
+    author: timur (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: LabelPK
+            name: id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: color
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: Label
+- changeSet:
+    id: 1605359693315-2
+    author: timur (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: StatusPK
+            name: id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: Status
+- changeSet:
+    id: 1605359693315-3
+    author: timur (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: TaskPK
+            name: id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: description
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: status_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: user_id
+            type: INT
+        tableName: Task
+- changeSet:
+    id: 1605359693315-4
+    author: timur (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: UserPK
+            name: id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(255)
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: password
+            type: VARCHAR(255)
+        tableName: User
+- changeSet:
+    id: 1605359693315-5
+    author: timur (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: label_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: task_id
+            type: INT
+        tableName: label_task
+- changeSet:
+    id: 1605359693315-6
+    author: timur (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: UC_USEREMAIL_COL
+        tableName: User
+- changeSet:
+    id: 1605359693315-7
+    author: timur (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: task_id
+        baseTableName: label_task
+        constraintName: FK92ncd0bw5p3jvt5kxfon2u1nd
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: Task
+        validate: true
+- changeSet:
+    id: 1605359693315-8
+    author: timur (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: status_id
+        baseTableName: Task
+        constraintName: FKa3ttig7x88k76ggivp7f5ndcn
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: Status
+        validate: true
+- changeSet:
+    id: 1605359693315-9
+    author: timur (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: label_id
+        baseTableName: label_task
+        constraintName: FKd4rys3i2vmka4etv9gs9yw8no
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: Label
+        validate: true
+- changeSet:
+    id: 1605359693315-10
+    author: timur (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: Task
+        constraintName: FKivoegv4wcae2vhyrw3y7rmx8j
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: User
+        validate: true
+

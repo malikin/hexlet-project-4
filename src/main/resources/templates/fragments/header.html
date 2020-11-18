@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="ru">
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm" th:fragment="header">
+    <a href="/" class="navbar-brand" th:text="#{common.header.title}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <a class="nav-link dropdown-toggle"
+                   href="#" id="tasksDropdown"
+                   role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"
+                   th:text="#{task.header.all}"></a>
+                <div class="dropdown-menu" aria-labelledby="tasksDropdown">
+                    <a class="dropdown-item" th:href="@{/tasks/}" th:text="#{task.header.list}"></a>
+                    <a class="dropdown-item" th:href="@{/tasks/new}" th:text="#{task.action.new}"></a>
+                </div>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a href="/login" class="nav-link"
+                   th:classappend="${module == 'login' ? 'active' : ''}"
+                   th:text="#{common.header.login}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a href="/registration" class="nav-link"
+                   th:classappend="${module == 'registration' ? 'active' : ''}"
+                   th:text="#{common.header.registration}"></a>
+            </li>
+            <form action="#" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" class="form-inline">
+                <input type="submit" th:value="#{common.header.logout}"/>
+            </form>
+        </ul>
+    </div>
+</nav>
+</body>
