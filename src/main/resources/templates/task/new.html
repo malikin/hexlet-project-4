@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/simple-head :: simple-head}">
+<body>
+</body>
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+<!-- Main -->
+<main class="flex-shrink-0 my-5">
+    <div class="container">
+        <h4 th:text="#{task.action.new}"></h4>
+        <h4 th:if="${error}" th:text="${error}"></h4>
+        <form th:method="post" th:action="@{/tasks}" th:object="${task}">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" th:text="#{task.name}"></span>
+                        </div>
+                        <input id="name" class="form-control"
+                               minlength="1" maxlength="255"
+                               type="text" autofocus required
+                               aria-describedby="taskHelpName"
+                               th:placeholder="#{task.help.name}" th:field="*{name}">
+                    </div>
+                    <small id="taskHelpName" class="form-text text-muted" th:text="#{task.help.name}"></small>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" th:text="#{task.description}"></span>
+                        </div>
+                        <input id="descriptionText" class="form-control"
+                               type="text" required
+                               aria-describedby="taskHelpDescription"
+                               th:placeholder="#{task.help.description}" th:field="*{description}">
+                    </div>
+                    <small id="taskHelpDescription" class="form-text text-muted" th:text="#{task.help.description}"></small>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" th:text="#{task.status}"></span>
+                        </div>
+                        <select class="custom-select" th:field="*{status}">
+                            <option value="" selected>Open this select menu</option>
+                            <option th:each="status : ${statuses}"
+                                    th:value="${status.id}"
+                                    th:text="${status.name}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" th:text="#{action.create}"></button>
+        </form>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</html>

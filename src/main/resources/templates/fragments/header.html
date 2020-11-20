@@ -13,6 +13,17 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                 <a class="nav-link dropdown-toggle"
+                   href="#" id="statusesDropdown"
+                   role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"
+                   th:text="#{statuses.header.all}"></a>
+                <div class="dropdown-menu" aria-labelledby="tasksDropdown">
+                    <a class="dropdown-item" th:href="@{/statuses/}" th:text="#{status.header.list}"></a>
+                    <a class="dropdown-item" th:href="@{/statuses/new}" th:text="#{status.action.new}"></a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                <a class="nav-link dropdown-toggle"
                    href="#" id="tasksDropdown"
                    role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"

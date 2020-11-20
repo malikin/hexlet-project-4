@@ -7,35 +7,27 @@
 <!-- Main -->
 <main class="flex-shrink-0 my-5">
     <div class="container">
-        <div class="row justify-content-md-center" th:if="${tasks.isEmpty()}">
-            <a class="btn btn-outline-info col col-lg-2" th:href="${'/tasks/new'}"
-               th:text="#{task.action.new}"></a>
+        <div class="row justify-content-md-center">
+            <a class="btn btn-outline-info col col-lg-2" th:href="${'/statuses/new'}"
+               th:text="#{status.action.new}"></a>
         </div>
-        <div th:unless="${tasks.isEmpty()}">
-            <h4 th:text="#{task.quantity} + ' ' + ${tasks.size()}"></h4>
+        <div th:unless="${statuses.isEmpty()}">
+            <h4 th:text="#{status.quantity} + ' ' + ${statuses.size()}"></h4>
             <div class="table-responsive-md">
                 <table class="table table-striped">
                     <thead class="thead-light">
                     <tr>
                         <th th:text="#{field.id}"></th>
-                        <th th:text="#{task.name}"></th>
-                        <th th:text="#{task.description}"></th>
-                        <th th:text="#{task.status}"></th>
+                        <th th:text="#{status.name}"></th>
                         <th th:text="#{action.list}"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="task : ${tasks}">
-                        <td th:text="${task.id}"></td>
-                        <td th:text="${task.name}"></td>
-                        <td th:text="${task.description}"></td>
+                    <tr th:each="status : ${statuses}">
+                        <td th:text="${status.id}"></td>
+                        <td th:text="${status.name}"></td>
                         <td>
-                            <span class="badge badge-info" th:text="${task.status.name}"></span>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-info float-left"
-                               th:href="${'/tasks/' + task.id}" th:text="#{action.view}"></a>
-                            <form action="#" th:action="@{'/tasks/{id}'(id=${task.id})}" th:method="delete">
+                            <form action="#" th:action="@{'/statuses/{id}'(id=${status.id})}" th:method="delete">
                                 <input type="hidden" name="_method" value="delete"/>
                                 <button class="btn btn-outline-danger" type="submit" id="deleteTask"
                                         th:text="#{action.delete}"></button>
