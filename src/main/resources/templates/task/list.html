@@ -34,7 +34,7 @@
                         </td>
                         <td>
                             <a class="btn btn-outline-info float-left"
-                               th:href="${'/tasks/' + task.id}" th:text="#{action.view}"></a>
+                               th:href="${'/tasks/' + task.id}" th:text="#{action.edit}"></a>
                             <form action="#" th:action="@{'/tasks/{id}'(id=${task.id})}" th:method="delete">
                                 <input type="hidden" name="_method" value="delete"/>
                                 <button class="btn btn-outline-danger" type="submit" id="deleteTask"

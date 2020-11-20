@@ -8,8 +8,10 @@ import io.hexlet.hexletproject4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,6 +55,12 @@ public class TaskController {
                 () -> model.addAttribute("error", format("User with name=%s not found", principal.getName()))
         );
 
+        return "redirect:/tasks";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteTask(@PathVariable Integer id) {
+        taskRepository.deleteById(id);
         return "redirect:/tasks";
     }
 }
