@@ -1,6 +1,6 @@
 package io.hexlet.hexletproject4.controller;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +12,14 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping("/login")
-@AllArgsConstructor
 public class LoginController {
 
     private final MessageSource messageSource;
+
+    @Autowired
+    public LoginController(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ModelAttribute("module")
     String module(Model model, String error, Locale locale) {

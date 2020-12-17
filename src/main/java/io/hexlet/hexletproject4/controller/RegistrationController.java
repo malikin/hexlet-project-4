@@ -23,19 +23,18 @@ import java.util.Optional;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    MessageSource messageSource;
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
-    @Autowired
-    UserRegistrationValidator userRegistrationValidator;
+    private final UserRepository userRepository;
+    private final MessageSource messageSource;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final UserRegistrationValidator userRegistrationValidator;
 
-//    @ModelAttribute("module")
-//    String module() {
-//        return "registration";
-//    }
+    @Autowired
+    public RegistrationController(UserRepository userRepository, MessageSource messageSource, BCryptPasswordEncoder passwordEncoder, UserRegistrationValidator userRegistrationValidator) {
+        this.userRepository = userRepository;
+        this.messageSource = messageSource;
+        this.passwordEncoder = passwordEncoder;
+        this.userRegistrationValidator = userRegistrationValidator;
+    }
 
     @GetMapping
     public String registration(UserRegistration userRegistration) {

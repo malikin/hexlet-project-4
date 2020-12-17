@@ -7,7 +7,8 @@
 <!-- Main -->
 <main class="flex-shrink-0 my-5">
     <div class="container">
-        <div class="row justify-content-md-center" th:if="${tasks.isEmpty()}">
+        <h1 th:text="#{task.header.list}"></h1>
+        <div class="row justify-content-md-center">
             <a class="btn btn-outline-info col col-lg-2" th:href="${'/tasks/new'}"
                th:text="#{task.action.new}"></a>
         </div>
@@ -34,7 +35,7 @@
                         </td>
                         <td>
                             <a class="btn btn-outline-info float-left"
-                               th:href="${'/tasks/' + task.id}" th:text="#{action.edit}"></a>
+                               th:href="${'/tasks/' + task.id + '/edit'}" th:text="#{action.edit}"></a>
                             <form action="#" th:action="@{'/tasks/{id}'(id=${task.id})}" th:method="delete">
                                 <input type="hidden" name="_method" value="delete"/>
                                 <button class="btn btn-outline-danger" type="submit" id="deleteTask"

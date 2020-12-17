@@ -18,8 +18,12 @@ import java.security.Principal;
 @RequestMapping("/statuses")
 public class StatusController {
 
+    private final StatusRepository repository;
+
     @Autowired
-    StatusRepository repository;
+    public StatusController(StatusRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping
     public String getTasks(Model model, Principal principal) {

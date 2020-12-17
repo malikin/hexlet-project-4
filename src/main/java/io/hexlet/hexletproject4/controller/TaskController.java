@@ -8,12 +8,7 @@ import io.hexlet.hexletproject4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -24,12 +19,16 @@ import static java.lang.String.format;
 @RequestMapping("/tasks")
 public class TaskController {
 
+    private final TaskRepository taskRepository;
+    private final StatusRepository statusRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    TaskRepository taskRepository;
-    @Autowired
-    StatusRepository statusRepository;
-    @Autowired
-    UserRepository userRepository;
+    public TaskController(TaskRepository taskRepository, StatusRepository statusRepository, UserRepository userRepository) {
+        this.taskRepository = taskRepository;
+        this.statusRepository = statusRepository;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping
     public String getTasks(Model model) {
@@ -42,6 +41,31 @@ public class TaskController {
         model.addAttribute("task", new Task());
         model.addAttribute("statuses", statusRepository.findAll());
         return "/task/new";
+    }
+
+    @GetMapping(value = "/{id}/edit")
+    public String getTaskEditForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("statuses", statusRepository.findAll());
+        taskRepository.findById(id).ifPresentOrElse(
+                task -> model.addAttribute("task", task),
+                () -> model.addAttribute("error", format("Task with id=%s not found", id))
+        );
+
+        return "/task/edit";
+    }
+
+    @PutMapping(value = "/{id}")
+    public String updateTask(@ModelAttribute Task task, Model model, Principal principal) {
+        Optional<User> userFound = userRepository.findByEmail(principal.getName());
+        userFound.ifPresentOrElse(
+                user -> {
+                    task.setUser(user);
+                    taskRepository.save(task);
+                },
+                () -> model.addAttribute("error", format("User with name=%s not found", principal.getName()))
+        );
+
+        return "redirect:/tasks";
     }
 
     @PostMapping
